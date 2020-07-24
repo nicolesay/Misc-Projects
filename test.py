@@ -1,12 +1,5 @@
-var = input('> ')
-var = int(var)
+list = [1, 2, 3]
 
-flag = False
-
-while flag == False:
-	if var == str(var):
-		print('Pass')
-		flag = True
-	else:
-		if var != str:
-			print('Try again')
+for i in list:
+	i = (i + 7)
+	print(i)
