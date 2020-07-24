@@ -3,6 +3,7 @@ import time
 current_user = ''
 expense_category = ''
 income_category = ''
+i_amount = 0
 
 ### Initialize Main SQLite Connection ###
 sqliteConnection = sqlite3.connect('Expenses.db')
@@ -13,6 +14,20 @@ navigation = ['1 - Enter a Transaction', '2 - Display Transactions', '3 - Modify
 expense_nav = ['1 - Debts', '2 - Entertainment', '3 - Food','4 - Healthcare', '5 - Home Improvement', '6 - Rent or Mortgage', '7 - Saving and Investing', '8 - Transportation', '9 - Utilities']
 income_nav = ['1 - Salary', '2 - Other Income', '3 - Refunds', '4 - Balance Adjustment']
 
+
+### Function to Determine if Input is a Number
+def IsNumber():
+	global i_amount
+	while True:
+		try:
+			i_amount == 0
+			i_amount = float(input('Enter Amount of Transaction > '))
+			return i_amount
+		except ValueError:
+			print('Must be a Number!')
+			continue
+		else:
+			break
 
 ### Function to Select Expense Category
 def ExpenseSelection():
@@ -283,7 +298,7 @@ while flag == False:
 				i_date = input('Enter Date as MM/DD/YYYY > ')
 				i_merchant = input('Enter Merchant Name > ')
 				i_description = input('Enter Transaction Description > ')
-				i_amount = input('Enter Amount of Transaction > ')\
+				IsNumber()
 				### Function to Load the Selection of Expense Categories
 				ExpenseSelection()
 				InsertToTable(i_date, i_merchant, i_description, (float(i_amount) * -1), expense_category, current_user)
@@ -294,7 +309,7 @@ while flag == False:
 				i_date = input('Enter Date as MM/DD/YYYY > ')
 				i_merchant = input('Enter Merchant Name > ')
 				i_description = input('Enter Transaction Description > ')
-				i_amount = input('Enter Amount of Transaction > ')
+				IsNumber()
 				### Function to Load the Selection of Income Categories
 				IncomeSelection()
 				InsertToTable(i_date, i_merchant, i_description, i_amount, income_category, current_user)
@@ -321,7 +336,14 @@ while flag == False:
 				i_date = input('Enter Date as MM/DD/YYYY > ')
 				i_merchant = input('Enter Merchant Name > ')
 				i_description = input('Enter Transaction Description > ')
-				i_amount = input('Enter Amount of Transaction > ')
+				while True:
+					try:
+						i_amount = int(input('Enter Amount of Transaction > '))
+					except ValueError:
+						print('Must be a Number!')
+						continue
+					else:
+						break
 				### Function to Load the Selection of Expense Categories
 				ExpenseSelection()
 				updateSqliteTable(i_date, i_merchant, i_description, (float(i_amount) * -1), expense_category, i_ID, current_user)
@@ -333,7 +355,7 @@ while flag == False:
 				i_date = input('Enter Date as MM/DD/YYYY > ')
 				i_merchant = input('Enter Merchant Name > ')
 				i_description = input('Enter Transaction Description > ')
-				i_amount = input('Enter Amount of Transaction > ')
+				IsNumber()
 				### Function to Load the Selection of Income Categories
 				IncomeSelection()
 				updateSqliteTable(i_date, i_merchant, i_description, i_amount, income_category, i_ID, current_user)
