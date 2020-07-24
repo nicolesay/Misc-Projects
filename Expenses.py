@@ -4,6 +4,7 @@ current_user = ''
 expense_category = ''
 income_category = ''
 i_amount = 0
+date = ''
 
 ### Initialize Main SQLite Connection ###
 sqliteConnection = sqlite3.connect('Expenses.db')
